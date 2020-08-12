@@ -1,6 +1,8 @@
-﻿using BinaryTree.Models;
+﻿using BinaryTree.Converter;
+using BinaryTree.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BinaryTree.MyBinaryTree
@@ -22,7 +24,7 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
-        public TreeNode<T> Root { get; set; }
+        public TreeNode<T> Root { get; private set; }
 
         // Максимальная глубина
         public int Depth => GetMaxDepth(Root);
@@ -233,6 +235,45 @@ namespace BinaryTree.MyBinaryTree
             ConvertTreeNodesToListNodes(currentNode.LeftNode, nodes);
             nodes.Add(currentNode);
             ConvertTreeNodesToListNodes(currentNode.RightNode, nodes);
+        }
+
+        private List<Student> GetListOfStudentsFromTree(BinaryTree<Student> binaryTree)
+        {
+            List<Student> thisStudents = new List<Student>();
+            MyConverter.ConvertBinaryTreeToList(binaryTree.Root, thisStudents);
+            return thisStudents;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is BinaryTree<T>))
+            {
+                return false;
+            }
+
+            BinaryTree<Student> bt = obj as BinaryTree<Student>;
+            List<Student> thisStudents = GetListOfStudentsFromTree(this as BinaryTree<Student>);
+            List<Student> otherStudents = GetListOfStudentsFromTree(bt);
+            return Enumerable.SequenceEqual(thisStudents, otherStudents) && IsBalanced == bt.IsBalanced && Depth == bt.Depth && CountOfNodes == bt.CountOfNodes;
+        }
+
+        public override int GetHashCode()
+        {
+            List<Student> thisStudents = GetListOfStudentsFromTree(this as BinaryTree<Student>);
+            return HashCode.Combine(Root, Depth, CountOfNodes, IsBalanced, thisStudents.GetHashCode());
+        }
+
+        public override string ToString()
+        {
+            List<Student> thisStudents = GetListOfStudentsFromTree(this as BinaryTree<Student>);
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (Student student in thisStudents)
+            {
+                stringBuilder.Append(student).Append("\n");
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }
