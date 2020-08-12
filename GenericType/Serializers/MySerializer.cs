@@ -12,16 +12,16 @@ namespace GenericType.Serializers
         private static void SerializeToBinaryFile(string path, T data)
         {
             using var fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-            var binarySerializer = new BinaryFormatter();
-            binarySerializer.Serialize(fileStream, data);
+            var binaryFormatter = new BinaryFormatter();
+            binaryFormatter.Serialize(fileStream, data);
         }
 
         private static T DeserializeFromBinaryFile(string path, string actualClassVersion)
         {
             using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                var binarySerializer = new BinaryFormatter();
-                dynamic tmp = binarySerializer.Deserialize(fileStream);
+                var binaryFormatter = new BinaryFormatter();
+                dynamic tmp = binaryFormatter.Deserialize(fileStream);
 
                 if (tmp.Version.ToString() == actualClassVersion)
                 {
