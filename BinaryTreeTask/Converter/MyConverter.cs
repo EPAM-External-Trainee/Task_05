@@ -17,5 +17,17 @@ namespace BinaryTree.Converter
             ConvertBinaryTreeToList(root.LeftNode, students);
             ConvertBinaryTreeToList(root.RightNode, students);
         }
+
+        public static void ConvertTreeNodesToListNodes<T>(TreeNode<T> currentNode, List<TreeNode<T>> nodes) where T : Student
+        {
+            if (currentNode == null)
+            {
+                return;
+            }
+
+            ConvertTreeNodesToListNodes(currentNode.LeftNode, nodes);
+            nodes.Add(currentNode);
+            ConvertTreeNodesToListNodes(currentNode.RightNode, nodes);
+        }
     }
 }

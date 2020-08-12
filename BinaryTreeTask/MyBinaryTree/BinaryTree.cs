@@ -190,7 +190,7 @@ namespace BinaryTree.MyBinaryTree
             }
 
             List<TreeNode<T>> nodes = new List<TreeNode<T>>();
-            ConvertTreeNodesToListNodes(Root, nodes);
+            MyConverter.ConvertTreeNodesToListNodes(Root, nodes);
             Root = BuildBalancedTree(nodes, 0, nodes.Count - 1);
         }
 
@@ -208,18 +208,6 @@ namespace BinaryTree.MyBinaryTree
             node.RightNode = BuildBalancedTree(nodes, middle + 1, end);
 
             return node;
-        }
-
-        private void ConvertTreeNodesToListNodes(TreeNode<T> currentNode, List<TreeNode<T>> nodes)
-        {
-            if (currentNode == null)
-            {
-                return;
-            }
-
-            ConvertTreeNodesToListNodes(currentNode.LeftNode, nodes);
-            nodes.Add(currentNode);
-            ConvertTreeNodesToListNodes(currentNode.RightNode, nodes);
         }
 
         private List<Student> GetListOfStudentsFromTree(BinaryTree<Student> binaryTree)
