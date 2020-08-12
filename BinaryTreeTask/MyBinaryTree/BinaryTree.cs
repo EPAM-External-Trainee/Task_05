@@ -9,7 +9,7 @@ namespace BinaryTree.MyBinaryTree
     {
         public BinaryTree(IEnumerable<T> students)
         {
-            if (students is null)
+            if (students == null)
             {
                 throw new ArgumentNullException("The source data must be initialized");
             }
@@ -68,13 +68,13 @@ namespace BinaryTree.MyBinaryTree
         // Добавление
         public void Add(T data)
         {
-            if (data is null)
+            if (data == null)
             {
                 throw new ArgumentNullException("The added data must be initialized");
             }
 
             TreeNode<T> newNode = new TreeNode<T>(data);
-            if (Root is null)
+            if (Root == null)
             {
                 Root = newNode;
                 return;
@@ -120,7 +120,7 @@ namespace BinaryTree.MyBinaryTree
         // Вспомогательный метод для удаления
         private TreeNode<T> DeleteNode(TreeNode<T> root, T data)
         {
-            if (root is null)
+            if (root == null)
             {
                 return null;
             }
@@ -135,11 +135,11 @@ namespace BinaryTree.MyBinaryTree
             }
             else
             {
-                if (root.LeftNode is null)
+                if (root.LeftNode == null)
                 {
                     return root.RightNode;
                 }
-                else if (root.RightNode is null)
+                else if (root.RightNode == null)
                 {
                     return root.LeftNode;
                 }
@@ -167,7 +167,7 @@ namespace BinaryTree.MyBinaryTree
         // TODO: сделать поиск(бинарный) по оценке
         public T Search(int testMark)
         {
-            if (Root is null)
+            if (Root == null)
             {
                 return null;
             }
@@ -225,7 +225,7 @@ namespace BinaryTree.MyBinaryTree
         // Вспомогательный метод для балансировки
         private void ConvertTreeNodesToListNodes(TreeNode<T> currentNode, List<TreeNode<T>> nodes)
         {
-            if (currentNode is null)
+            if (currentNode == null)
             {
                 return;
             }
