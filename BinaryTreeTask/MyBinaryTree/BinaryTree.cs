@@ -257,11 +257,7 @@ namespace BinaryTree.MyBinaryTree
             return Enumerable.SequenceEqual(thisStudents, otherStudents) && IsBalanced == bt.IsBalanced && Depth == bt.Depth && CountOfNodes == bt.CountOfNodes;
         }
 
-        public override int GetHashCode()
-        {
-            List<Student> thisStudents = GetListOfStudentsFromTree(this as BinaryTree<Student>);
-            return HashCode.Combine(Root, Depth, CountOfNodes, IsBalanced, thisStudents.GetHashCode());
-        }
+        public override int GetHashCode() => HashCode.Combine(Root, Depth, CountOfNodes, IsBalanced, GetListOfStudentsFromTree(this as BinaryTree<Student>).GetHashCode());
 
         public override string ToString()
         {
