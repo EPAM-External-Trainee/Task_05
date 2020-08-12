@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenericType.Enums;
+using System;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -8,111 +9,90 @@ namespace GenericType.Serializers
 {
     public static class MySerializer<T> where T : class
     {
-        public static void SerializeToBinaryFile(string path, T data)
+        private static void SerializeToBinaryFile(string path, T data)
         {
-            try
-            {
-                using var fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-                var binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(fileStream, data);
-            }
-            catch(Exception exc)
-            {
-                throw new Exception(exc.Message);
-            }
+            using var fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            var binarySerializer = new BinaryFormatter();
+            binarySerializer.Serialize(fileStream, data);
         }
 
-        public static T DeserializeFromBinaryFile(string path, string actualClassVersion)
+        private static T DeserializeFromBinaryFile(string path, string actualClassVersion)
         {
-            try
+            using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                var binaryFormatter = new BinaryFormatter();
+                var binarySerializer = new BinaryFormatter();
+                dynamic tmp = binarySerializer.Deserialize(fileStream);
 
-                dynamic tmp = binaryFormatter.Deserialize(fileStream);
                 if (tmp.Version.ToString() == actualClassVersion)
                 {
                     return (T)tmp;
                 }
 
-                throw new InvalidCastException("Error on deserialization of different versions of classes");
-            }
-            catch(Exception exc)
-            {
-                throw new Exception(exc.Message);
+                throw new InvalidCastException("Different version of classes");
             }
         }
 
-        public static void SerializeToJSONFile(string path, T data)
+        private static void SerializeToJSONFile(string path, T data)
         {
-            try
+            using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
+            var jsonSerializer = new DataContractJsonSerializer(typeof(T));
+            jsonSerializer.WriteObject(fileStream, data);
+        }
+
+        private static T DeserializeFromJSONFile(string path, string actualClassVersion)
+        {
+            using var fileStream = new FileStream(path, FileMode.Open);
+            var jsonSerializer = new DataContractJsonSerializer(typeof(T));
+            dynamic tmp = jsonSerializer.ReadObject(fileStream);
+
+            if (tmp.Version.ToString() == actualClassVersion)
             {
-                using var fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-                var jsonSerializer = new DataContractJsonSerializer(typeof(T));
-                jsonSerializer.WriteObject(fileStream, data);
+                return (T)tmp;
             }
-            catch(Exception exc)
+
+            throw new InvalidCastException("Different version of classes");
+        }
+
+        private static void SerializeToXmlFile(string path, T data)
+        {
+            using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
+            var xmlSerializer = new DataContractSerializer(typeof(T));
+            xmlSerializer.WriteObject(fileStream, data);
+        }
+
+        private static T DeserializeFromXmlFile(string path, string actualClassVersion)
+        {
+            using var fileStream = new FileStream(path, FileMode.Open);
+            var xmlSerializer = new DataContractSerializer(typeof(T));
+            dynamic tmp = xmlSerializer.ReadObject(fileStream);
+
+            if (tmp.Version.ToString() == actualClassVersion)
             {
-                throw new Exception(exc.Message);
+                return (T)tmp;
+            }
+
+            throw new InvalidCastException("Different version of classes");
+        }
+
+        public static void Serialize(string path, T data, SerializationType serializationType)
+        {
+            switch (serializationType)
+            {
+                case SerializationType.Binary: SerializeToBinaryFile(path, data); break;
+                case SerializationType.JSON: SerializeToJSONFile(path, data); break;
+                case SerializationType.XML: SerializeToXmlFile(path, data); break;
             }
         }
 
-        public static T DeserializeFromJSONFile(string path, string actualClassVersion)
+        public static T Deserialize(string path, string actualClassVersion, SerializationType serializationType)
         {
-            try
+            return serializationType switch
             {
-                using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                var jsonSerializer = new DataContractJsonSerializer(typeof(T));
-
-                dynamic tmp = jsonSerializer.ReadObject(fileStream);
-                if (tmp.Version.ToString() == actualClassVersion)
-                {
-                    return (T)tmp;
-                }
-
-                throw new InvalidCastException("Error on deserialization of different versions of classes");
-            }
-            catch(Exception exc)
-            {
-                throw new Exception(exc.Message);
-            }
-
-        }
-
-        public static void SerializeToXmlFile(string path, T data)
-        {
-            try
-            {
-                using var fileStream = new FileStream(path, FileMode.OpenOrCreate);
-                var xmlSerializer = new DataContractSerializer(typeof(T));
-                xmlSerializer.WriteObject(fileStream, data);
-            }
-            catch(Exception exc)
-            {
-                throw new Exception(exc.Message);
-            }
-
-        }
-
-        public static T DeserializeFromXmlFile(string path, string actualClassVersion)
-        {
-            try
-            {
-                using var fileStream = new FileStream(path, FileMode.Open);
-                var xmlSerializer = new DataContractSerializer(typeof(T));
-
-                dynamic tmp = xmlSerializer.ReadObject(fileStream);
-                if (tmp.Version.ToString() == actualClassVersion)
-                {
-                    return (T)tmp;
-                }
-
-                throw new InvalidCastException("Error on deserialization of different versions of classes");
-            }
-            catch(Exception exc)
-            {
-                throw new Exception(exc.Message);
-            }
+                SerializationType.Binary => DeserializeFromBinaryFile(path, actualClassVersion),
+                SerializationType.JSON => DeserializeFromJSONFile(path, actualClassVersion),
+                SerializationType.XML => DeserializeFromXmlFile(path, actualClassVersion),
+                _ => null,
+            };
         }
     }
 }
