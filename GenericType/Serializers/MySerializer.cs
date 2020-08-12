@@ -78,9 +78,9 @@ namespace GenericType.Serializers
         {
             switch (serializationType)
             {
-                case SerializationType.Binary: SerializeToBinaryFile(path, data); break;
-                case SerializationType.JSON: SerializeToJSONFile(path, data); break;
-                case SerializationType.XML: SerializeToXmlFile(path, data); break;
+                case SerializationType.Binary: SerializeToBinaryFile(path, data); return;
+                case SerializationType.JSON: SerializeToJSONFile(path, data); return;
+                case SerializationType.XML: SerializeToXmlFile(path, data); return;
             }
         }
 
