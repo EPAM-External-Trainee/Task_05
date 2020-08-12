@@ -107,7 +107,7 @@ namespace GenericType.Serializers
                     return (T)tmp;
                 }
 
-                throw new InvalidCastException("Different version of classes");
+                throw new InvalidCastException("Error on deserialization of different versions of classes");
             }
             catch(Exception exc)
             {
