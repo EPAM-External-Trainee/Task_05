@@ -26,10 +26,8 @@ namespace BinaryTree.MyBinaryTree
 
         public TreeNode<T> Root { get; private set; }
 
-        // Максимальная глубина
         public int Depth => GetMaxDepth(Root);
 
-        // Рекурскивный поиск максмальной глубины
         private int GetMaxDepth(TreeNode<T> root)
         {
             if (root == null)
@@ -43,19 +41,14 @@ namespace BinaryTree.MyBinaryTree
             return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
         }
 
-        // Количество всех узлов
         public int CountOfNodes => GetCountOfNodes(Root);
 
-        // Получение числа всех узлов
         private int GetCountOfNodes(TreeNode<T> root) => root == null ? 0 : 1 + GetCountOfNodes(root.LeftNode) + GetCountOfNodes(root.RightNode);
 
-        // Получение максимальной глубины(высоты) поддерева
         private int GetHeight(TreeNode<T> treeNode) => treeNode == null ? 0 : 1 + Math.Max(GetHeight(treeNode.LeftNode), GetHeight(treeNode.RightNode));
 
-        // Проверка на текущее состояние дерева
         public bool IsBalanced => IsBalancedTree(Root);
 
-        // Проверка текущего состояние дерева
         private bool IsBalancedTree(TreeNode<T> root)
         {
             if (root == null)
@@ -67,7 +60,6 @@ namespace BinaryTree.MyBinaryTree
 
         }
 
-        // Добавление
         public void Add(T data)
         {
             if (data == null)
@@ -113,13 +105,11 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
-        // TODO: сделать удаление
         public void Remove(T data)
         {
             Root = DeleteNode(Root, data);
         }
 
-        // Вспомогательный метод для удаления
         private TreeNode<T> DeleteNode(TreeNode<T> root, T data)
         {
             if (root == null)
@@ -154,7 +144,6 @@ namespace BinaryTree.MyBinaryTree
             return root;
         }
 
-        /// Вспомогательный метод для удаления
         private T MinValue(TreeNode<T> root)
         {
             T minValue = root.Data;
@@ -166,7 +155,6 @@ namespace BinaryTree.MyBinaryTree
             return minValue;
         }
 
-        // TODO: сделать поиск(бинарный) по оценке
         public T Search(int testMark)
         {
             if (Root == null)
@@ -194,7 +182,6 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
-        // TODO: сделать балансировку
         public void BalanceTree()
         {
             if (IsBalanced)
@@ -207,7 +194,6 @@ namespace BinaryTree.MyBinaryTree
             Root = BuildBalancedTree(nodes, 0, nodes.Count - 1);
         }
 
-        // Вспомогательный метод для балансировки
         private TreeNode<T> BuildBalancedTree(List<TreeNode<T>> nodes, int start, int end)
         {
             if (start > end)
@@ -224,7 +210,6 @@ namespace BinaryTree.MyBinaryTree
             return node;
         }
 
-        // Вспомогательный метод для балансировки
         private void ConvertTreeNodesToListNodes(TreeNode<T> currentNode, List<TreeNode<T>> nodes)
         {
             if (currentNode == null)
