@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace BinaryTreeNUnitTest
 {
+    [Description("Class for testing BinaryTree<T> class methods")]
     [TestFixture]
     public class BinaryTreeTests
     {

@@ -9,6 +9,8 @@ namespace BinaryTree.Models
     {
         private int _mark;
 
+        public Student() { }
+
         public Student(string name, string surname, Subject subject, DateTime testDate, int mark)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));

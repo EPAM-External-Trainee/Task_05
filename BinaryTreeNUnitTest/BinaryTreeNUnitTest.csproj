@@ -16,4 +16,8 @@
     <ProjectReference Include="..\BinaryTreeTask\BinaryTree.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FileWorkerTests\Resources\" />
+  </ItemGroup>
+
 </Project>

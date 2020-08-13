@@ -32,16 +32,16 @@ namespace BinaryTree.Converter
             return nodes;
         }
 
-        private static void GetListFromTreeNodes<T>(TreeNode<T> currentNode, List<TreeNode<T>> nodes) where T : Student
+        private static void GetListFromTreeNodes<T>(TreeNode<T> root, List<TreeNode<T>> nodes) where T : Student
         {
-            if (currentNode == null)
+            if (root == null)
             {
                 return;
             }
 
-            GetListFromTreeNodes(currentNode.LeftNode, nodes);
-            nodes.Add(currentNode);
-            GetListFromTreeNodes(currentNode.RightNode, nodes);
+            GetListFromTreeNodes(root.LeftNode, nodes);
+            nodes.Add(root);
+            GetListFromTreeNodes(root.RightNode, nodes);
         }
     }
 }
