@@ -103,14 +103,17 @@ namespace BinaryTree.MyBinaryTree
 
         public void Remove(T data)
         {
-            Root = RemoveNode(Root, data);
+            if (data != null)
+            {
+                Root = RemoveNode(Root, data);
+            }
         }
 
         private TreeNode<T> RemoveNode(TreeNode<T> root, T data)
         {
             if (root == null)
             {
-                return null;
+                throw new ArgumentException("The desired element is missing from the tree");
             }
 
             if (root.Data.CompareTo(data) > 0)
@@ -133,7 +136,6 @@ namespace BinaryTree.MyBinaryTree
                 }
 
                 root.Data = MinValue(root.RightNode);
-
                 root.RightNode = RemoveNode(root.RightNode, root.Data);
             }
 

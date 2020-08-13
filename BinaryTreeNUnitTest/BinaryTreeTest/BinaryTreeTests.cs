@@ -76,7 +76,7 @@ namespace BinaryTreeNUnitTest
 
         [Description("Testing the balancing of a tree")]
         [TestCaseSource(nameof(GetStudentsListTestCases))]
-        public void Balance_Test(List<Student> students)
+        public void BalanceTree_Test(List<Student> students)
         {
             var expectedBalancedTree = new BinaryTree<Student>(students);
             _sourceBinaryTree.BalanceTree();
