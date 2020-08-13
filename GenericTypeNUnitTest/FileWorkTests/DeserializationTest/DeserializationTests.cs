@@ -9,7 +9,7 @@ using System.IO;
 
 namespace GenericTypeNUnitTest.FileWorkTests.SerializationTest
 {
-    [Description("Class for testing serialization of objects in various file formats ")]
+    [Description("Class for testing deserialization of objects in various file formats ")]
     [TestFixture]    
     class DeserializationTests : GenericFileWorker
     {
@@ -26,7 +26,7 @@ namespace GenericTypeNUnitTest.FileWorkTests.SerializationTest
             });
         }
 
-        [Description("Testing object deseserialization from binary file")]
+        [Description("Testing object deserialization from binary file")]
         [Test]
         public void DeserializeFromBinaryFile_Object_Test()
         {
