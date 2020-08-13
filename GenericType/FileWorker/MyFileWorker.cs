@@ -4,7 +4,7 @@ using GenericType.Interfaces;
 
 namespace GenericType.Serializers
 {
-    public static class MySerializer<T> where T : class
+    public static class MyFileWorker<T> where T : class
     {
         private static readonly IBinaryFileWorker binaryFileWorker = new BinaryFileWorker();
         private static readonly IJSONFileWorker jSONFileWorker = new JSONFileWorker();
