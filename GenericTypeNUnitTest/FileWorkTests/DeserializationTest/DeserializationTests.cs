@@ -11,7 +11,7 @@ namespace GenericTypeNUnitTest.FileWorkTests.SerializationTest
 {
     [Description("Class for testing deserialization of objects from various file formats ")]
     [TestFixture]    
-    class DeserializationTests : GenericFileWorker
+    public class DeserializationTests : GenericFileWorker
     {
         [Description("Initialization of _student and _students objects")]
         [OneTimeSetUp]

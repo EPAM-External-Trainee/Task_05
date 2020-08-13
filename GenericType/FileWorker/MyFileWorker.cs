@@ -1,6 +1,7 @@
 ﻿using GenericType.Enums;
 using GenericType.FileWorker;
 using GenericType.Interfaces;
+using System;
 
 namespace GenericType.Serializers
 {
@@ -12,23 +13,45 @@ namespace GenericType.Serializers
 
         public static void Serialize(string path, T data, SerializationType serializationType)
         {
-            switch (serializationType)
+            try
             {
-                case SerializationType.Binary: binaryFileWorker.SerializeToBinaryFile(path, data); return;
-                case SerializationType.JSON: jSONFileWorker.SerializeToJSONFile(path, data); return;
-                case SerializationType.XML: xmlFileWorker.SerializeToXmlFile(path, data); return;
+                switch (serializationType)
+                {
+                    case SerializationType.Binary: binaryFileWorker.SerializeToBinaryFile(path, data); return;
+                    case SerializationType.JSON: jSONFileWorker.SerializeToJSONFile(path, data); return;
+                    case SerializationType.XML: xmlFileWorker.SerializeToXmlFile(path, data); return;
+                }
+            }
+            catch (InvalidCastException ice)
+            {
+                throw new InvalidCastException(ice.Message);
+            }
+            catch (Exception exc)
+            {
+                throw new Exception(exc.Message);
             }
         }
 
         public static T Deserialize(string path, string actualClassVersion, DeserializationType deserializationType)
         {
-            return deserializationType switch
+            try
             {
-                DeserializationType.Binary => binaryFileWorker.DeserializeFromBinaryFile<T>(path, actualClassVersion),
-                DeserializationType.JSON => jSONFileWorker.DeserializeFromJSONFile<T>(path, actualClassVersion),
-                DeserializationType.XML => xmlFileWorker.DeserializeFromXmlFile<T>(path, actualClassVersion),
-                _ => null,
-            };
+                return deserializationType switch
+                {
+                    DeserializationType.Binary => binaryFileWorker.DeserializeFromBinaryFile<T>(path, actualClassVersion),
+                    DeserializationType.JSON => jSONFileWorker.DeserializeFromJSONFile<T>(path, actualClassVersion),
+                    DeserializationType.XML => xmlFileWorker.DeserializeFromXmlFile<T>(path, actualClassVersion),
+                    _ => null,
+                };
+            }
+            catch (InvalidCastException ice)
+            {
+                throw new InvalidCastException(ice.Message);
+            }
+            catch (Exception exc)
+            {
+                throw new Exception(exc.Message);
+            }
         }
     }
 }

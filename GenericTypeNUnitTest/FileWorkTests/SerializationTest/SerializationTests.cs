@@ -31,6 +31,7 @@ namespace GenericTypeNUnitTest.DeserializationTest
         public void SerializeToBinaryFile_Object_Test()
         {
             MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _binaryFileExtension), Student, SerializationType.Binary);
+            Assert.AreEqual(Student, MyFileWorker<Student>.Deserialize(Path.Combine(_pathToFiles, typeof(Student).Name + _binaryFileExtension), Student.Version.ToString(), DeserializationType.Binary));
         }
 
         [Description("Testing object serialization to JSON file")]
@@ -38,6 +39,7 @@ namespace GenericTypeNUnitTest.DeserializationTest
         public void SerializeToJSONFile_Object_Test()
         {
             MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _jsonFileExtension), Student, SerializationType.JSON);
+            Assert.AreEqual(Student, MyFileWorker<Student>.Deserialize(Path.Combine(_pathToFiles, typeof(Student).Name + _jsonFileExtension), Student.Version.ToString(), DeserializationType.JSON));
         }
 
         [Description("Testing object serialization to XML file")]
@@ -45,6 +47,7 @@ namespace GenericTypeNUnitTest.DeserializationTest
         public void SerializeToXmlFile_Object_Test()
         {
             MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _xmlFileExtension), Student, SerializationType.XML);
+            Assert.AreEqual(Student, MyFileWorker<Student>.Deserialize(Path.Combine(_pathToFiles, typeof(Student).Name + _xmlFileExtension), Student.Version.ToString(), DeserializationType.XML));
         }
 
         [Description("Testing object collection serialization to binary file")]
@@ -52,6 +55,7 @@ namespace GenericTypeNUnitTest.DeserializationTest
         public void SerializeToBinaryFile_ObjectCollection_Test()
         {
             MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _binaryFileExtension), Students, SerializationType.Binary);
+            Assert.AreEqual(Students, MyFileWorker<StudentsCollection<Student>>.Deserialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _binaryFileExtension), Students.Version.ToString(), DeserializationType.Binary));
         }
 
         [Description("Testing object collection serialization to JSON file")]
@@ -59,6 +63,7 @@ namespace GenericTypeNUnitTest.DeserializationTest
         public void SerializeToJSONFile_ObjectCollection_Test()
         {
             MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _jsonFileExtension), Students, SerializationType.JSON);
+            Assert.AreEqual(Students, MyFileWorker<StudentsCollection<Student>>.Deserialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _jsonFileExtension), Students.Version.ToString(), DeserializationType.JSON));
         }
 
         [Description("Testing object collection serialization to XML file")]
@@ -66,6 +71,7 @@ namespace GenericTypeNUnitTest.DeserializationTest
         public void SerializeToXmlFile_ObjectCollection_Test()
         {
             MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _xmlFileExtension), Students, SerializationType.XML);
+            Assert.AreEqual(Students, MyFileWorker<StudentsCollection<Student>>.Deserialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _xmlFileExtension), Students.Version.ToString(), DeserializationType.XML));
         }
     }
 }
