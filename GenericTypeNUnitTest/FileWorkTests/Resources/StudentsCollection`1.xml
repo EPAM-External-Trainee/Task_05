@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student>
+    <Version />
+    <Name>Vasya</Name>
+    <Surname>Vasiliev</Surname>
+    <Birthday>2000-12-12T13:15:15</Birthday>
+  </Student>
+  <Student>
+    <Version />
+    <Name>Petya</Name>
+    <Surname>Petrov</Surname>
+    <Birthday>1999-05-07T08:13:06</Birthday>
+  </Student>
+  <Student>
+    <Version />
+    <Name>Kolya</Name>
+    <Surname>Koloev</Surname>
+    <Birthday>1995-09-07T15:10:10</Birthday>
+  </Student>
+</ArrayOfStudent>

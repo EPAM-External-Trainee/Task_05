@@ -23,7 +23,7 @@ namespace GenericType.FileWorker
 
         public void SerializeToBinaryFile<T>(string path, T data) where T : class
         {
-            using var fileStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(fileStream, data);
         }

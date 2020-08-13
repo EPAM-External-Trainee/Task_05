@@ -16,7 +16,7 @@ namespace BinaryTree.FileWorker
             List<Student> students = MyConverter.ConvertBinaryTreeToList(binaryTree.Root).ToList();
 
             using FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Student>));
+            var xmlSerializer = new XmlSerializer(typeof(List<Student>));
             xmlSerializer.Serialize(fs, students);
         }
 

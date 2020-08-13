@@ -10,7 +10,7 @@ namespace BinaryTreeNUnitTest.FileWorkerTests
 {
     [Description("Class for testing FileWorker class methods")]
     [TestFixture]
-    class FileWorkerTests
+    public class FileWorkerTests
     {
         private BinaryTree<Student> _binaryTree;
         private const string _pathToXmlFile = @"..\..\..\FileWorkerTests\BinaryTree.xml";

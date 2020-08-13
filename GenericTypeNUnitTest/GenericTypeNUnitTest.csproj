@@ -16,4 +16,8 @@
     <ProjectReference Include="..\GenericType\GenericType.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FileWorkTests\Resources\" />
+  </ItemGroup>
+
 </Project>
