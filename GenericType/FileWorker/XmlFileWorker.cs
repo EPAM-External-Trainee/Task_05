@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Xml.Serialization;
 
 namespace GenericType.FileWorker
 {
@@ -24,9 +23,9 @@ namespace GenericType.FileWorker
 
         public void SerializeToXmlFile<T>(string path, T data) where T : class
         {
-            using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
-            var xmlSerializer = new XmlSerializer(typeof(T));
-            xmlSerializer.Serialize(fileStream, data);
+            using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Write);
+            var xmlSerializer = new DataContractSerializer(typeof(T));
+            xmlSerializer.WriteObject(fileStream, data);
         }
     }
 }
