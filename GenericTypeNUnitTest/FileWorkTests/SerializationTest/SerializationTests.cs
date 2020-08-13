@@ -30,42 +30,42 @@ namespace GenericTypeNUnitTest.DeserializationTest
         [Test]
         public void SerializeToBinaryFile_Object_Test()
         {
-            MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _binaryExtension), Student, SerializationType.Binary);
+            MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _binaryFileExtension), Student, SerializationType.Binary);
         }
 
         [Description("Testing object serialization to JSON file")]
         [Test]
         public void SerializeToJSONFile_Object_Test()
         {
-            MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _jsonExtension), Student, SerializationType.JSON);
+            MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _jsonFileExtension), Student, SerializationType.JSON);
         }
 
         [Description("Testing object serialization to XML file")]
         [Test]
         public void SerializeToXmlFile_Object_Test()
         {
-            MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _xmlExtension), Student, SerializationType.XML);
+            MyFileWorker<Student>.Serialize(Path.Combine(_pathToFiles, typeof(Student).Name + _xmlFileExtension), Student, SerializationType.XML);
         }
 
         [Description("Testing object collection serialization to binary file")]
         [Test]
         public void SerializeToBinaryFile_ObjectCollection_Test()
         {
-            MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _binaryExtension), Students, SerializationType.Binary);
+            MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _binaryFileExtension), Students, SerializationType.Binary);
         }
 
         [Description("Testing object collection serialization to JSON file")]
         [Test]
         public void SerializeToJSONFile_ObjectCollection_Test()
         {
-            MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _jsonExtension), Students, SerializationType.JSON);
+            MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _jsonFileExtension), Students, SerializationType.JSON);
         }
 
         [Description("Testing object collection serialization to XML file")]
         [Test]
         public void SerializeToXmlFile_ObjectCollection_Test()
         {
-            MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _xmlExtension), Students, SerializationType.XML);
+            MyFileWorker<StudentsCollection<Student>>.Serialize(Path.Combine(_pathToFiles, typeof(StudentsCollection<Student>).Name + _xmlFileExtension), Students, SerializationType.XML);
         }
     }
 }
