@@ -75,6 +75,15 @@ namespace BinaryTreeNUnitTest
             Assert.IsNull(_sourceBinaryTree.Search(_student));
         }
 
+        [Description("Testing removing a node from a tree which isn't inside")]
+        [TestCase("Kostya", "Kostin", Subject.Geography, 2014, 6, 10, 6)]
+        public void Remove_Test_Null(string name, string surname, Subject subject, int year, int month, int day, int mark)
+        {
+            Student student = new Student(name, surname, subject, new DateTime(year, month, day), mark);
+            _sourceBinaryTree.Remove(student);
+            Assert.IsNull(_sourceBinaryTree.Search(student));
+        }
+
         [Description("Testing the balancing of a tree")]
         [TestCaseSource(nameof(GetStudentsListTestCases))]
         public void BalanceTree_Test(List<Student> students)

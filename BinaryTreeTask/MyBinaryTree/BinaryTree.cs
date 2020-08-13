@@ -113,7 +113,7 @@ namespace BinaryTree.MyBinaryTree
         {
             if (root == null)
             {
-                throw new ArgumentException("The desired element is missing from the tree");
+                return null;
             }
 
             if (root.Data.CompareTo(data) > 0)
