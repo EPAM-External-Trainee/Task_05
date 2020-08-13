@@ -6,6 +6,13 @@ namespace BinaryTree.MyBinaryTree
     {
         public TreeNode(T data) => Data = data;
 
+        public TreeNode(T data, TreeNode<T> leftNode, TreeNode<T> rightNode)
+        {
+            Data = data;
+            LeftNode = leftNode;
+            RightNode = rightNode;
+        }
+
         public TreeNode<T> LeftNode { get; set; }
 
         public TreeNode<T> RightNode { get; set; }
