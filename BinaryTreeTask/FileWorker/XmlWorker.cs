@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Converter;
+using BinaryTree.Interfaces;
 using BinaryTree.Models;
 using BinaryTree.MyBinaryTree;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Xml.Serialization;
 
 namespace BinaryTree.FileWorker
 {
-    public static class XmlWorker
+    internal class XmlWorker : IXmlFileWorker
     {
-        public static void SerializeBinaryTreeToXmlFile(string path, BinaryTree<Student> binaryTree)
+        public void SerializeBinaryTreeToXmlFile(string path, BinaryTree<Student> binaryTree)
         {
             List<Student> students = new List<Student>();
             MyConverter.ConvertBinaryTreeToList(binaryTree.Root, students);
@@ -19,7 +20,7 @@ namespace BinaryTree.FileWorker
             xmlSerializer.Serialize(fs, students);
         }
 
-        public static BinaryTree<Student> DeserializeBinaryTreeFromXmlFile(string path)
+        public BinaryTree<Student> DeserializeBinaryTreeFromXmlFile(string path)
         {
             using FileStream fs = new FileStream(path, FileMode.Open);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Student>));

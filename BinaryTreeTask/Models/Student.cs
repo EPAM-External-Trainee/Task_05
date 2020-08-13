@@ -43,7 +43,7 @@ namespace BinaryTree.Models
             }
         }
 
-        public int CompareTo(Student other) => Mark.CompareTo(other?.Mark);
+        public int CompareTo(Student otherStudent) => Mark.CompareTo(otherStudent?.Mark);
 
         public override bool Equals(object obj) => obj is Student student && Name == student.Name && Surname == student.Surname && Subject == student.Subject && TestDate == student.TestDate && Mark == student.Mark;
 

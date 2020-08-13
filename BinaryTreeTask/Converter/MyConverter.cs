@@ -25,8 +25,8 @@ namespace BinaryTree.Converter
                 return;
             }
 
-            ConvertTreeNodesToListNodes(currentNode.LeftNode, nodes);
             nodes.Add(currentNode);
+            ConvertTreeNodesToListNodes(currentNode.LeftNode, nodes);
             ConvertTreeNodesToListNodes(currentNode.RightNode, nodes);
         }
     }
