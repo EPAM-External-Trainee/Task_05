@@ -20,13 +20,13 @@ namespace GenericType.Serializers
             }
         }
 
-        public static T Deserialize(string path, string actualClassVersion, SerializationType serializationType)
+        public static T Deserialize(string path, string actualClassVersion, DeserializationType deserializationType)
         {
-            return serializationType switch
+            return deserializationType switch
             {
-                SerializationType.Binary => binaryFileWorker.DeserializeFromBinaryFile<T>(path, actualClassVersion),
-                SerializationType.JSON => jSONFileWorker.DeserializeFromJSONFile<T>(path, actualClassVersion),
-                SerializationType.XML => xmlFileWorker.DeserializeFromXmlFile<T>(path, actualClassVersion),
+                DeserializationType.Binary => binaryFileWorker.DeserializeFromBinaryFile<T>(path, actualClassVersion),
+                DeserializationType.JSON => jSONFileWorker.DeserializeFromJSONFile<T>(path, actualClassVersion),
+                DeserializationType.XML => xmlFileWorker.DeserializeFromXmlFile<T>(path, actualClassVersion),
                 _ => null,
             };
         }
