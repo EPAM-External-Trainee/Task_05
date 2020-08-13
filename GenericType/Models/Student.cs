@@ -10,10 +10,10 @@ namespace GenericType.Models
     {
         public Student() { }
 
-        public Student(string name, int age, DateTime birthday)
+        public Student(string name, string surname, DateTime birthday)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            Age = age;
+            Surname = surname ?? throw new ArgumentNullException(nameof(surname));
             Birthday = birthday;
         }
 
@@ -24,15 +24,15 @@ namespace GenericType.Models
         public string Name { get; set; }
 
         [DataMember]
-        public int Age { get; set; }
+        public string Surname { get; set; }
 
         [DataMember]
         public DateTime Birthday { get; set; }
 
-        public override bool Equals(object obj) => obj is Student student && Name == student.Name && Age == student.Age && Birthday == student.Birthday;
+        public override bool Equals(object obj) => obj is Student student && Name == student.Name && Surname == student.Surname && Birthday == student.Birthday;
 
-        public override int GetHashCode() => HashCode.Combine(Name, Age, Birthday);
+        public override int GetHashCode() => HashCode.Combine(Name, Surname, Birthday);
 
-        public override string ToString() => $"{Name};{Age};{Birthday.ToShortDateString()}";
+        public override string ToString() => $"{Name};{Surname};{Birthday.ToShortDateString()}";
     }
 }
