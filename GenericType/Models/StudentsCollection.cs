@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenericType.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace GenericType.Models
 {
     [Serializable]
     [DataContract]
-    public class StudentsCollection<T> : ICollection<T> where T : Student
+    public class StudentsCollection<T> : IClassVersion, ICollection<T> where T : Student
     {
         public StudentsCollection() { }
 

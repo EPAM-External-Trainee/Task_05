@@ -6,7 +6,7 @@ namespace GenericType.Models
 {
     [Serializable]
     [DataContract]
-    public class Student : ISerialize<Student>
+    public class Student : ISerialize<Student>, IClassVersion
     {
         public Student() { }
 
