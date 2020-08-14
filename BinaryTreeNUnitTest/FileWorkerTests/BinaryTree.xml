@@ -5,41 +5,41 @@
     <Surname>Vasiliev</Surname>
     <Subject>Mathematics</Subject>
     <TestDate>2020-05-10T00:00:00</TestDate>
-    <Mark>9</Mark>
+    <Mark>90</Mark>
   </Student>
   <Student>
     <Name>Petya</Name>
     <Surname>Petrov</Surname>
     <Subject>Geography</Subject>
     <TestDate>2020-05-16T00:00:00</TestDate>
-    <Mark>6</Mark>
+    <Mark>60</Mark>
   </Student>
   <Student>
     <Name>Ilya</Name>
     <Surname>Iliev</Surname>
     <Subject>Physics</Subject>
     <TestDate>2020-05-05T00:00:00</TestDate>
-    <Mark>4</Mark>
+    <Mark>40</Mark>
   </Student>
   <Student>
     <Name>Kostya</Name>
     <Surname>Kostin</Surname>
     <Subject>Geography</Subject>
     <TestDate>2014-06-10T00:00:00</TestDate>
-    <Mark>1</Mark>
+    <Mark>10</Mark>
   </Student>
   <Student>
     <Name>Alex</Name>
     <Surname>Alexandrov</Surname>
     <Subject>Geography</Subject>
     <TestDate>2020-05-16T00:00:00</TestDate>
-    <Mark>5</Mark>
+    <Mark>50</Mark>
   </Student>
   <Student>
     <Name>Kolya</Name>
     <Surname>Koloev</Surname>
     <Subject>Mathematics</Subject>
     <TestDate>2020-05-10T00:00:00</TestDate>
-    <Mark>10</Mark>
+    <Mark>100</Mark>
   </Student>
 </ArrayOfStudent>

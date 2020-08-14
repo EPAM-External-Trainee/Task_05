@@ -21,12 +21,12 @@ namespace BinaryTreeNUnitTest
         {
             _students = new List<Student>()
             {
-                new Student("Vasya", "Vasiliev", Subject.Mathematics, new DateTime(2020, 5, 10), 9),
-                new Student("Petya", "Petrov", Subject.Geography, new DateTime(2020, 5, 16), 6),
-                new Student("Ilya", "Iliev", Subject.Physics, new DateTime(2020, 5, 5), 4),
-                new Student("Kolya", "Koloev", Subject.Mathematics, new DateTime(2020, 5, 10), 10),
-                new Student("Alex", "Alexandrov", Subject.Geography, new DateTime(2020, 5, 16), 5),
-                new Student("Kostya", "Kostin", Subject.Geography, new DateTime(2014, 6, 10), 1),
+                new Student("Vasya", "Vasiliev", Subject.Mathematics, new DateTime(2020, 5, 10), 90),
+                new Student("Petya", "Petrov", Subject.Geography, new DateTime(2020, 5, 16), 60),
+                new Student("Ilya", "Iliev", Subject.Physics, new DateTime(2020, 5, 5), 40),
+                new Student("Kolya", "Koloev", Subject.Mathematics, new DateTime(2020, 5, 10), 100),
+                new Student("Alex", "Alexandrov", Subject.Geography, new DateTime(2020, 5, 16), 50),
+                new Student("Kostya", "Kostin", Subject.Geography, new DateTime(2014, 6, 10), 10),
             };
 
             _sourceBinaryTree = new BinaryTree<Student>(_students);
@@ -47,9 +47,9 @@ namespace BinaryTreeNUnitTest
         }
 
         [Description("Testing adding a node to a tree")]
-        [TestCase("Ivan", "Ivanov", Subject.Geography, 2020, 08, 05, 7)]
-        [TestCase("Daniel", "Danielov", Subject.Physics, 2020, 08, 06, 3)]
-        [TestCase("Kirill", "Kirillov", Subject.Physics, 2020, 08, 06, 2)]
+        [TestCase("Ivan", "Ivanov", Subject.Geography, 2020, 08, 05, 70)]
+        [TestCase("Daniel", "Danielov", Subject.Physics, 2020, 08, 06, 30)]
+        [TestCase("Kirill", "Kirillov", Subject.Physics, 2020, 08, 06, 20)]
         public void Add_Test(string name, string surname, Subject subject, int year, int month, int day, int mark)
         {
             _student = new Student(name, surname, subject, new DateTime(year, month, day), mark);
@@ -58,16 +58,16 @@ namespace BinaryTreeNUnitTest
         }
 
         [Description("Testing adding an existing node in a tree")]
-        [TestCase("Kostya", "Kostin", Subject.Geography, 2014, 6, 10, 1)]
+        [TestCase("Kostya", "Kostin", Subject.Geography, 2014, 6, 10, 10)]
         public void Add_Test_ArgumentExcpetion(string name, string surname, Subject subject, int year, int month, int day, int mark)
         {
             Assert.Throws<ArgumentException>(() => _sourceBinaryTree.Add(new Student(name, surname, subject, new DateTime(year, month, day), mark)));
         }
 
         [Description("Testing removing a node from a tree")]
-        [TestCase("Kolya", "Koloev", Subject.Mathematics, 2020, 5, 10, 10)]
-        [TestCase("Alex", "Alexandrov", Subject.Geography, 2020, 5, 16, 5)]
-        [TestCase("Kostya", "Kostin", Subject.Geography, 2014, 6, 10, 1)]
+        [TestCase("Kolya", "Koloev", Subject.Mathematics, 2020, 5, 10, 100)]
+        [TestCase("Alex", "Alexandrov", Subject.Geography, 2020, 5, 16, 50)]
+        [TestCase("Kostya", "Kostin", Subject.Geography, 2014, 6, 10, 10)]
         public void Remove_Test(string name, string surname, Subject subject, int year, int month, int day, int mark)
         {
             _student = new Student(name, surname, subject, new DateTime(year, month, day), mark);
@@ -76,7 +76,7 @@ namespace BinaryTreeNUnitTest
         }
 
         [Description("Testing removing a node from a tree which isn't inside")]
-        [TestCase("Kostya", "Kostin", Subject.Geography, 2014, 6, 10, 6)]
+        [TestCase("Kostya", "Kostin", Subject.Geography, 2014, 6, 10, 60)]
         public void Remove_Test_Null(string name, string surname, Subject subject, int year, int month, int day, int mark)
         {
             Student student = new Student(name, surname, subject, new DateTime(year, month, day), mark);
@@ -101,12 +101,12 @@ namespace BinaryTreeNUnitTest
             {
                 new List<Student>
                 {
-                    new Student("Petya", "Petrov", Subject.Geography, new DateTime(2020, 5, 16), 6),
-                    new Student("Ilya", "Iliev", Subject.Physics, new DateTime(2020, 5, 5), 4),
-                    new Student("Alex", "Alexandrov", Subject.Geography, new DateTime(2020, 5, 16), 5),
-                    new Student("Kostya", "Kostin", Subject.Geography, new DateTime(2014, 6, 10), 1),
-                    new Student("Kolya", "Koloev", Subject.Mathematics, new DateTime(2020, 5, 10), 10),
-                    new Student("Vasya", "Vasiliev", Subject.Mathematics, new DateTime(2020, 5, 10), 9),
+                    new Student("Petya", "Petrov", Subject.Geography, new DateTime(2020, 5, 16), 60),
+                    new Student("Ilya", "Iliev", Subject.Physics, new DateTime(2020, 5, 5), 40),
+                    new Student("Alex", "Alexandrov", Subject.Geography, new DateTime(2020, 5, 16), 50),
+                    new Student("Kostya", "Kostin", Subject.Geography, new DateTime(2014, 6, 10), 10),
+                    new Student("Kolya", "Koloev", Subject.Mathematics, new DateTime(2020, 5, 10), 100),
+                    new Student("Vasya", "Vasiliev", Subject.Mathematics, new DateTime(2020, 5, 10), 90),
                 }
             };
         }
