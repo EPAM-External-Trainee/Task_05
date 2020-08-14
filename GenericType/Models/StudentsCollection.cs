@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GenericType.Models
 {
-    /// <summary>lass that describes <see cref="Student"/> collection</summary>
+    /// <summary>Class that describes <see cref="Student"/> collection</summary>
     /// <typeparam name="T"><see cref="Student"/></typeparam>
     [Serializable]
     [DataContract]
@@ -21,7 +21,7 @@ namespace GenericType.Models
         /// <param name="students"><see cref="IEnumerable{T}"/> of students</param>
         public StudentsCollection(IEnumerable<T> students) => Students = students.ToList();
 
-        /// <summary><see cref="List{T}"/> of <see cref="Student"/>'s</summary>
+        /// <inheritdoc cref="IStudentsCollection{T}.Students"/>
         [DataMember]
         public List<T> Students { get; set; }
 
