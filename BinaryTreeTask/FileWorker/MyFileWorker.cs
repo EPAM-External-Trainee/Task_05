@@ -2,6 +2,7 @@
 using BinaryTree.Interfaces;
 using BinaryTree.Models;
 using BinaryTree.MyBinaryTree;
+using System;
 
 namespace BinaryTree.FileWorker
 {
@@ -17,9 +18,16 @@ namespace BinaryTree.FileWorker
         /// <param name="type"><see cref="SerializationType"/></param>
         public static void SerializeBinaryTree(string path, BinaryTree<Student> binaryTree, SerializationType type)
         {
-            switch (type)
+            try
             {
-                case SerializationType.XML: _fileWorker = new XmlWorker(); _fileWorker.SerializeBinaryTree(path, binaryTree); return;
+                switch (type)
+                {
+                    case SerializationType.XML: _fileWorker = new XmlWorker(); _fileWorker.SerializeBinaryTree(path, binaryTree); return;
+                }
+            }
+            catch(Exception exc)
+            {
+                throw new Exception(exc.Message);
             }
         }
 
@@ -29,9 +37,16 @@ namespace BinaryTree.FileWorker
         /// <returns><see cref="BinaryTree{T}"/> from file</returns>
         public static BinaryTree<Student> DeserializeBinaryTree(string path, DeserializationType type)
         {
-            switch (type)
+            try
             {
-                case DeserializationType.XML: _fileWorker = new XmlWorker(); return _fileWorker.DeserializeBinaryTree(path);
+                switch (type)
+                {
+                    case DeserializationType.XML: _fileWorker = new XmlWorker(); return _fileWorker.DeserializeBinaryTree(path);
+                }
+            }
+            catch(Exception exc)
+            {
+                throw new Exception(exc.Message);
             }
 
             return null;
