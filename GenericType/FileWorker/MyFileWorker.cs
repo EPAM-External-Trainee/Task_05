@@ -5,10 +5,17 @@ using System;
 
 namespace GenericType.Serializers
 {
+    /// <summary>Class that describes basic operations for working with data of custom generic types</summary>
+    /// <typeparam name="T"><see cref="class"/></typeparam>
     public static class MyFileWorker<T> where T : class
     {
+        /// <summary><see cref="IFileWorker"/> object</summary>
         private static IFileWorker _fileWorker;
 
+        /// <summary>Serializing data to a file with the selected format</summary>
+        /// <param name="path">Path to file</param>
+        /// <param name="data">Serializable class</param>
+        /// <param name="serializationType">Type for serialization</param>
         public static void Serialize(string path, T data, SerializationType serializationType)
         {
             try
@@ -30,6 +37,11 @@ namespace GenericType.Serializers
             }
         }
 
+        /// <summary>Deserializing data to a file with the selected format</summary>
+        /// <param name="path">Path to file</param>
+        /// <param name="data">Serializable class</param>
+        /// <param name="deserializationType">Type for deserialization</param>
+        /// <returns></returns>
         public static T Deserialize(string path, string actualClassVersion, DeserializationType deserializationType)
         {
             try
