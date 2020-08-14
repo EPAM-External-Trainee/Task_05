@@ -9,8 +9,8 @@ namespace BinaryTree.FileWorker
     /// <summary>Class that describes working with files</summary>
     public static class MyFileWorker
     {
-        /// <summary><see cref="IXmlFileWorker"/> object</summary>
-        private static readonly IXmlFileWorker xmlFileWorker = new XmlWorker();
+        /// <summary><see cref="IFileWorker"/> object</summary>
+        private static IFileWorker _fileWorker;
 
         /// <summary>Serializing the <see cref="BinaryTree{T}"/> to the selected <see cref="SerializationType"/></summary>
         /// <param name="path">Path to file</param>
@@ -20,7 +20,7 @@ namespace BinaryTree.FileWorker
         {
             switch (type)
             {
-                case SerializationType.XML: xmlFileWorker.SerializeBinaryTree(path, binaryTree); return;
+                case SerializationType.XML: _fileWorker = new XmlWorker(); _fileWorker.SerializeBinaryTree(path, binaryTree); return;
             }
         }
 
@@ -28,10 +28,14 @@ namespace BinaryTree.FileWorker
         /// <param name="path">Path to file</param>
         /// <param name="type"><see cref="DeserializationType"/></param>
         /// <returns><see cref="BinaryTree{T}"/> from file</returns>
-        public static BinaryTree<Student> DeserializeBinaryTree(string path, DeserializationType type) => type switch
+        public static BinaryTree<Student> DeserializeBinaryTree(string path, DeserializationType type)
         {
-            DeserializationType.XML => xmlFileWorker.DeserializeBinaryTree(path),
-            _ => throw new NotSupportedException(),
-        };
+            switch (type)
+            {
+                case DeserializationType.XML: _fileWorker = new XmlWorker(); return _fileWorker.DeserializeBinaryTree(path);
+            }
+
+            return null;
+        }
     }
 }
