@@ -12,7 +12,7 @@ namespace GenericType.Models
     /// <typeparam name="T"><see cref="Student"/></typeparam>
     [Serializable]
     [DataContract]
-    public class StudentsCollection<T> : IClassVersion, ICollection<T> where T : Student
+    public class StudentsCollection<T> : IClassVersion, IStudentsCollection<T> where T : Student
     {
         /// <summary>The instance constructor by default</summary>
         public StudentsCollection() { }

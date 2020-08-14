@@ -7,7 +7,7 @@ namespace GenericType.Models
     /// <summary>Class that describes student</summary>
     [Serializable]
     [DataContract]
-    public class Student : ISerialize<Student>, IClassVersion
+    public class Student : ISerialize<Student>, IClassVersion, IStudent
     {
         /// <summary>The instance constructor by default</summary>
         public Student() { }
@@ -27,15 +27,15 @@ namespace GenericType.Models
         [DataMember]
         public Version Version { get; set; } = new Version("1.1.1.0");
 
-        /// <summary>Student name</summary>
+        /// <inheritdoc cref="IStudent.Name"/>
         [DataMember]
         public string Name { get; set; }
 
-        /// <summary>Student surname</summary>
+        /// <inheritdoc cref="IStudent.Surname"/>
         [DataMember]
         public string Surname { get; set; }
 
-        /// <summary>Student birthday</summary>
+        /// <inheritdoc cref="IStudent.Birthday"/>
         [DataMember]
         public DateTime Birthday { get; set; }
 
