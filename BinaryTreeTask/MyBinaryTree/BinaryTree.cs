@@ -7,8 +7,12 @@ using System.Text;
 
 namespace BinaryTree.MyBinaryTree
 {
+    /// <summary>Class that describes binary tree</summary>
+    /// <typeparam name="T"></typeparam>
     public class BinaryTree<T> where T : Student
     {
+        /// <summary>Instance constructor with parameters</summary>
+        /// <param name="students"><see cref="IEnumerable{T}"/> of students</param>
         public BinaryTree(IEnumerable<T> students)
         {
             if (students == null)
@@ -24,38 +28,27 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
+        /// <summary>Root</summary>
         public TreeNode<T> Root { get; private set; }
 
+        /// <summary>Max depth</summary>
         public int Depth => GetMaxDepth(Root);
 
-        private int GetMaxDepth(TreeNode<T> root)
-        {
-            if (root == null)
-            {
-                return 0;
-            }
-
-            int leftDepth = GetHeight(root.LeftNode);
-            int rightDepth = GetHeight(root.RightNode);
-
-            return leftDepth > rightDepth ? leftDepth + 1 : rightDepth + 1;
-        }
-
-        private int GetHeight(TreeNode<T> treeNode) => treeNode == null ? 0 : 1 + Math.Max(GetHeight(treeNode.LeftNode), GetHeight(treeNode.RightNode));
-
+        /// <summary>Information about the current state of the tree</summary>
         public bool IsBalanced => IsBalancedTree(Root);
 
-        private bool IsBalancedTree(TreeNode<T> root)
-        {
-            if (root == null)
-            {
-                return true;
-            }
+        /// <summary>Search for maximum depth</summary>
+        /// <param name="root"><see cref="BinaryTree{T}.Root"/></param>
+        /// <returns>Max depth</returns>
+        private int GetMaxDepth(TreeNode<T> treeNode) => treeNode == null ? 0 : 1 + Math.Max(GetMaxDepth(treeNode.LeftNode), GetMaxDepth(treeNode.RightNode));
 
-            return Math.Abs(GetHeight(root.LeftNode) - GetHeight(root.RightNode)) <= 1 && IsBalancedTree(root.LeftNode) && IsBalancedTree(root.RightNode);
+        /// <summary>Check for a balanced tree</summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        private bool IsBalancedTree(TreeNode<T> root) => root == null ? true : Math.Abs(GetMaxDepth(root.LeftNode) - GetMaxDepth(root.RightNode)) <= 1 && IsBalancedTree(root.LeftNode) && IsBalancedTree(root.RightNode);
 
-        }
-
+        /// <summary>Adding data to the tree</summary>
+        /// <param name="data">Data to add</param>
         public void Add(T data)
         {
             if (data == null)
@@ -101,6 +94,8 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
+        /// <summary>Deleting data from the tree</summary>
+        /// <param name="data">Data to delete</param>
         public void Remove(T data)
         {
             if (data != null)
@@ -109,50 +104,60 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
-        private TreeNode<T> RemoveNode(TreeNode<T> root, T data)
+        /// <summary>Removing a node from the tree</summary>
+        /// <param name="node"><see cref="BinaryTree{T}.Root"/></param>
+        /// <param name="data">Data</param>
+        /// <returns>new <see cref="BinaryTree{T}.Root"/></returns>
+        private TreeNode<T> RemoveNode(TreeNode<T> node, T data)
         {
-            if (root == null)
+            if (node == null)
             {
                 return null;
             }
 
-            if (root.Data.CompareTo(data) > 0)
+            if (node.Data.CompareTo(data) > 0)
             {
-                root.LeftNode = RemoveNode(root.LeftNode, data);
+                node.LeftNode = RemoveNode(node.LeftNode, data);
             }
-            else if (root.Data.CompareTo(data) == -1)
+            else if (node.Data.CompareTo(data) == -1)
             {
-                root.RightNode = RemoveNode(root.RightNode, data);
+                node.RightNode = RemoveNode(node.RightNode, data);
             }
             else
             {
-                if (root.LeftNode == null)
+                if (node.LeftNode == null)
                 {
-                    return root.RightNode;
+                    return node.RightNode;
                 }
-                else if (root.RightNode == null)
+                else if (node.RightNode == null)
                 {
-                    return root.LeftNode;
+                    return node.LeftNode;
                 }
 
-                root.Data = MinValue(root.RightNode);
-                root.RightNode = RemoveNode(root.RightNode, root.Data);
+                node.Data = MinValue(node.RightNode);
+                node.RightNode = RemoveNode(node.RightNode, node.Data);
             }
 
-            return root;
+            return node;
         }
 
-        private T MinValue(TreeNode<T> root)
+        /// <summary>Search smallest in the right subtree</summary>
+        /// <param name="node">Right subtree root</param>
+        /// <returns>Smallest in the right subtree data</returns>
+        private T MinValue(TreeNode<T> node)
         {
-            T minValue = root.Data;
-            while (root.LeftNode != null)
+            T minValue = node.Data;
+            while (node.LeftNode != null)
             {
-                minValue = root.LeftNode.Data;
-                root = root.LeftNode;
+                minValue = node.LeftNode.Data;
+                node = node.LeftNode;
             }
             return minValue;
         }
 
+        /// <summary>Search for data in the tree</summary>
+        /// <param name="student">Search data</param>
+        /// <returns>Search data or null</returns>
         public T Search(T student)
         {
             if (Root == null)
@@ -181,6 +186,7 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
+        /// <summary>To start the balancing tree</summary>
         public void BalanceTree()
         {
             if (IsBalanced)
@@ -192,6 +198,11 @@ namespace BinaryTree.MyBinaryTree
             Root = BuildBalancedTree(nodes.OrderBy(n => n.Data.Mark).ToList(), 0, nodes.Count);
         }
 
+        /// <summary>Tree balancing</summary>
+        /// <param name="nodes">Nodes of the tree</param>
+        /// <param name="min">Min value of nodes count</param>
+        /// <param name="max">Max value of nodes count</param>
+        /// <returns>new <see cref="BinaryTree{T}.Root"/></returns>
         private TreeNode<T> BuildBalancedTree(List<TreeNode<T>> nodes, int min, int max)
         {
             if (min == max)
@@ -203,6 +214,7 @@ namespace BinaryTree.MyBinaryTree
             return new TreeNode<T>(nodes[middle].Data, BuildBalancedTree(nodes, min, middle), BuildBalancedTree(nodes, middle + 1, max));
         }
 
+        /// <inheritdoc cref="object.Equals(object?)"/>
         public override bool Equals(object obj)
         {
             if (!(obj is BinaryTree<T>))
@@ -211,16 +223,18 @@ namespace BinaryTree.MyBinaryTree
             }
 
             BinaryTree<Student> bt = obj as BinaryTree<Student>;
-            List<Student> thisStudents = MyConverter.ConvertBinaryTreeToList(Root).ToList() as List<Student>;
-            List<Student> otherStudents = MyConverter.ConvertBinaryTreeToList(bt.Root).ToList() as List<Student>;
+            List<Student> thisStudents = MyConverter.ConvertBinaryTreeToIEnumerable(Root).ToList() as List<Student>;
+            List<Student> otherStudents = MyConverter.ConvertBinaryTreeToIEnumerable(bt.Root).ToList() as List<Student>;
             return Enumerable.SequenceEqual(thisStudents, otherStudents) && IsBalanced == bt.IsBalanced && Depth == bt.Depth;
         }
 
-        public override int GetHashCode() => HashCode.Combine(Root, Depth, IsBalanced, MyConverter.ConvertBinaryTreeToList(Root).ToList() as List<Student>).GetHashCode();
+        /// <inheritdoc cref="object.GetHashCode"/>
+        public override int GetHashCode() => HashCode.Combine(Root, Depth, IsBalanced, MyConverter.ConvertBinaryTreeToIEnumerable(Root).ToList() as List<Student>).GetHashCode();
 
+        /// <inheritdoc cref="object.ToString"/>
         public override string ToString()
         {
-            List<Student> thisStudents = MyConverter.ConvertBinaryTreeToList(Root).ToList() as List<Student>;
+            List<Student> thisStudents = MyConverter.ConvertBinaryTreeToIEnumerable(Root).ToList() as List<Student>;
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (Student student in thisStudents)
