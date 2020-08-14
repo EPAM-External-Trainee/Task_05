@@ -6,7 +6,7 @@ namespace BinaryTree.Models
 {
     /// <summary>Class that describes student</summary>
     [Serializable]
-    public class Student : ITestResult, IComparable<Student>
+    public class Student : IStudent, ITestResult, IComparable<Student>
     {
         /// <summary>Test result mark</summary>
         private int _mark;
@@ -29,10 +29,10 @@ namespace BinaryTree.Models
             Mark = mark;
         }
 
-        /// <summary>Student name</summary>
+        /// <inheritdoc cref="IStudent.Name"/>
         public string Name { get; set; }
 
-        /// <summary>Student surname</summary>
+        /// <inheritdoc cref="IStudent.Surname"/>
         public string Surname { get; set; }
 
         /// <inheritdoc cref="ITest.Subject"/>
@@ -48,13 +48,13 @@ namespace BinaryTree.Models
 
             set
             {
-                if (value > 0 && value < 11)
+                if (value > 0 && value < 101)
                 {
                     _mark = value;
                 }
                 else
                 {
-                    throw new ArgumentException("The test mark can't be less than or equal to 0 or greater than 10");
+                    throw new ArgumentException("The test mark can't be less than or equal to 0 or greater than 100");
                 }
             }
         }

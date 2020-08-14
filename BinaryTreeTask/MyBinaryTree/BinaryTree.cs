@@ -1,4 +1,5 @@
 ﻿using BinaryTree.Converter;
+using BinaryTree.Interfaces;
 using BinaryTree.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace BinaryTree.MyBinaryTree
 {
     /// <summary>Class that describes binary tree</summary>
     /// <typeparam name="T"></typeparam>
-    public class BinaryTree<T> where T : Student
+    public class BinaryTree<T> : IBinaryTree<T> where T : Student
     {
         /// <summary>Instance constructor with parameters</summary>
         /// <param name="students"><see cref="IEnumerable{T}"/> of students</param>
@@ -28,13 +29,13 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
-        /// <summary>Root</summary>
-        public TreeNode<T> Root { get; private set; }
+        /// <inheritdoc cref="IBinaryTree.Root"/>
+        public TreeNode<T> Root { get; set; }
 
-        /// <summary>Max depth</summary>
+        /// <inheritdoc cref="IBinaryTree.Depth"/>
         public int Depth => GetMaxDepth(Root);
 
-        /// <summary>Information about the current state of the tree</summary>
+        /// <inheritdoc cref="IBinaryTree.IsBalanced"/>
         public bool IsBalanced => IsBalancedTree(Root);
 
         /// <summary>Search for maximum depth</summary>
@@ -47,8 +48,7 @@ namespace BinaryTree.MyBinaryTree
         /// <returns></returns>
         private bool IsBalancedTree(TreeNode<T> root) => root == null ? true : Math.Abs(GetMaxDepth(root.LeftNode) - GetMaxDepth(root.RightNode)) <= 1 && IsBalancedTree(root.LeftNode) && IsBalancedTree(root.RightNode);
 
-        /// <summary>Adding data to the tree</summary>
-        /// <param name="data">Data to add</param>
+        /// <inheritdoc cref="IBinaryTree.Add(T)"/>
         public void Add(T data)
         {
             if (data == null)
@@ -94,8 +94,7 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
-        /// <summary>Deleting data from the tree</summary>
-        /// <param name="data">Data to delete</param>
+        /// <inheritdoc cref="IBinaryTree.Remove(T)"/>
         public void Remove(T data)
         {
             if (data != null)
@@ -155,9 +154,7 @@ namespace BinaryTree.MyBinaryTree
             return minValue;
         }
 
-        /// <summary>Search for data in the tree</summary>
-        /// <param name="student">Search data</param>
-        /// <returns>Search data or null</returns>
+        /// <inheritdoc cref="IBinaryTree.Search(T)"/>
         public T Search(T student)
         {
             if (Root == null)
@@ -186,7 +183,7 @@ namespace BinaryTree.MyBinaryTree
             }
         }
 
-        /// <summary>To start the balancing tree</summary>
+        /// <inheritdoc cref="IBinaryTree.BalanceTree"/>
         public void BalanceTree()
         {
             if (IsBalanced)

@@ -1,10 +1,11 @@
-﻿using BinaryTree.Models;
+﻿using BinaryTree.Interfaces;
+using BinaryTree.Models;
 
 namespace BinaryTree.MyBinaryTree
 {
     /// <summary>Class that describes <see cref="BinaryTree{T}"/> node</summary>
     /// <typeparam name="T"><see cref="Student"/></typeparam>
-    public class TreeNode<T> where T : Student
+    public class TreeNode<T> : ITreeNode<T> where T : Student
     {
         /// <summary></summary>
         /// <param name="data"></param>
@@ -21,13 +22,13 @@ namespace BinaryTree.MyBinaryTree
             RightNode = rightNode;
         }
 
-        /// <summary>Left node</summary>
+        /// <inheritdoc cref="ITreeNode{T}.LeftNode"/>
         public TreeNode<T> LeftNode { get; set; }
 
-        /// <summary>Right node</summary>
+        /// <inheritdoc cref="ITreeNode{T}.RightNode"/>
         public TreeNode<T> RightNode { get; set; }
 
-        /// <summary>Data</summary>
+        /// <inheritdoc cref="ITreeNode{T}.Data"/>
         public T Data { get; set; }
     }
 }
