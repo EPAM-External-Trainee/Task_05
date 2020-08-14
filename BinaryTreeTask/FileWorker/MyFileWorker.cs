@@ -12,25 +12,25 @@ namespace BinaryTree.FileWorker
         /// <summary><see cref="IXmlFileWorker"/> object</summary>
         private static readonly IXmlFileWorker xmlFileWorker = new XmlWorker();
 
-        /// <summary>Serializing the <see cref="BinaryTree{T}"/> to the selected <see cref="SerializeType"/></summary>
+        /// <summary>Serializing the <see cref="BinaryTree{T}"/> to the selected <see cref="SerializationType"/></summary>
         /// <param name="path">Path to file</param>
         /// <param name="binaryTree"><see cref="BinaryTree{T}"/></param>
-        /// <param name="type"><see cref="SerializeType"/></param>
-        public static void SerializeBinaryTree(string path, BinaryTree<Student> binaryTree, SerializeType type)
+        /// <param name="type"><see cref="SerializationType"/></param>
+        public static void SerializeBinaryTree(string path, BinaryTree<Student> binaryTree, SerializationType type)
         {
             switch (type)
             {
-                case SerializeType.XML: xmlFileWorker.SerializeBinaryTree(path, binaryTree); return;
+                case SerializationType.XML: xmlFileWorker.SerializeBinaryTree(path, binaryTree); return;
             }
         }
 
-        /// <summary>Deserializing the <see cref="BinaryTree{T}"/> to the selected <see cref="DeserializeType"/></summary>
+        /// <summary>Deserializing the <see cref="BinaryTree{T}"/> to the selected <see cref="DeserializationType"/></summary>
         /// <param name="path">Path to file</param>
-        /// <param name="type"><see cref="DeserializeType"/></param>
+        /// <param name="type"><see cref="DeserializationType"/></param>
         /// <returns><see cref="BinaryTree{T}"/> from file</returns>
-        public static BinaryTree<Student> DeserializeBinaryTree(string path, DeserializeType type) => type switch
+        public static BinaryTree<Student> DeserializeBinaryTree(string path, DeserializationType type) => type switch
         {
-            DeserializeType.XML => xmlFileWorker.DeserializeBinaryTree(path),
+            DeserializationType.XML => xmlFileWorker.DeserializeBinaryTree(path),
             _ => throw new NotSupportedException(),
         };
     }

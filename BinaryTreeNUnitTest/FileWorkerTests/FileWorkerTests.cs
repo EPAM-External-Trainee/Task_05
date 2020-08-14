@@ -34,9 +34,9 @@ namespace BinaryTreeNUnitTest.FileWorkerTests
         [Test]
         public void SerializeBinaryTree_Test()
         {
-            MyFileWorker.SerializeBinaryTree(_pathToXmlFile, _binaryTree, SerializeType.XML);
+            MyFileWorker.SerializeBinaryTree(_pathToXmlFile, _binaryTree, SerializationType.XML);
 
-            var expectedBinaryTree = MyFileWorker.DeserializeBinaryTree(_pathToXmlFile, DeserializeType.XML);
+            var expectedBinaryTree = MyFileWorker.DeserializeBinaryTree(_pathToXmlFile, DeserializationType.XML);
 
             Assert.AreEqual(_binaryTree, expectedBinaryTree);
         }
@@ -45,7 +45,7 @@ namespace BinaryTreeNUnitTest.FileWorkerTests
         [Test]
         public void DeserializeBinaryTree_Test()
         {
-            Assert.AreEqual(_binaryTree, MyFileWorker.DeserializeBinaryTree(_pathToXmlFile, DeserializeType.XML));
+            Assert.AreEqual(_binaryTree, MyFileWorker.DeserializeBinaryTree(_pathToXmlFile, DeserializationType.XML));
         }
     }
 }

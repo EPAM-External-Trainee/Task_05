@@ -5,13 +5,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace GenericType.FileWorker
 {
+    /// <summary>Class that describes basic operations for working with binary file</summary>
     public class BinaryFileWorker : IBinaryFileWorker
     {
-        public T DeserializeFromBinaryFile<T>(string path, string actualClassVersion) where T : class
+        /// <summary><see cref="BinaryFormatter"/> object</summary>
+        private BinaryFormatter _binaryFormatter;
+
+        /// <inheritdoc cref="IFileWorker.Deserialize{T}(string, string)"/>
+        public T Deserialize<T>(string path, string actualClassVersion) where T : class
         {
             using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            var binaryFormatter = new BinaryFormatter();
-            dynamic tmp = binaryFormatter.Deserialize(fileStream);
+            _binaryFormatter = new BinaryFormatter();
+            dynamic tmp = _binaryFormatter.Deserialize(fileStream);
 
             if (tmp.Version.ToString() == actualClassVersion)
             {
@@ -21,11 +26,12 @@ namespace GenericType.FileWorker
             throw new InvalidCastException("Different version of classes");
         }
 
-        public void SerializeToBinaryFile<T>(string path, T data) where T : class
+        /// <inheritdoc cref="IFileWorker.Serialize{T}(string, T)"/>
+        public void Serialize<T>(string path, T data) where T : class
         {
             using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
-            var binaryFormatter = new BinaryFormatter();
-            binaryFormatter.Serialize(fileStream, data);
+            _binaryFormatter = new BinaryFormatter();
+            _binaryFormatter.Serialize(fileStream, data);
         }
     }
 }

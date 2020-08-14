@@ -1,9 +1,8 @@
 ﻿namespace GenericType.Interfaces
 {
-    public interface IXmlFileWorker
+    /// <summary>Interface that describes basic operations for working with JSON file</summary>
+    public interface IXmlFileWorker : IFileWorker
     {
-        void SerializeToXmlFile<T>(string path, T data) where T : class;
 
-        T DeserializeFromXmlFile<T>(string path, string actualClassVersion) where T : class;
     }
 }

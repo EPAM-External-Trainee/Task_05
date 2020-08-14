@@ -6,15 +6,21 @@ using System.Runtime.Serialization.Json;
 
 namespace GenericType.FileWorker
 {
+    /// <summary>Class that describes basic operations for working with JSON file</summary>
     public class JSONFileWorker : IJSONFileWorker
     {
+        /// <summary><see cref="DataContractJsonSerializerSettings"/> object</summary>
         private readonly DataContractJsonSerializerSettings _settings = new DataContractJsonSerializerSettings() { DateTimeFormat = new DateTimeFormat("yyyy-MM-ddTHH:mm:ss.fffK") };
 
-        public T DeserializeFromJSONFile<T>(string path, string actualClassVersion) where T : class
+        /// <summary><see cref="DataContractJsonSerializer"/> object</summary>
+        private DataContractJsonSerializer _jsonSerializer;
+
+        /// <inheritdoc cref="IFileWorker.Deserialize{T}(string, string)"/>
+        public T Deserialize<T>(string path, string actualClassVersion) where T : class
         {
             using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            var jsonSerializer = new DataContractJsonSerializer(typeof(T), _settings);
-            dynamic tmp = jsonSerializer.ReadObject(fileStream);
+            _jsonSerializer = new DataContractJsonSerializer(typeof(T), _settings);
+            dynamic tmp = _jsonSerializer.ReadObject(fileStream);
 
             if (tmp.Version.ToString() == actualClassVersion)
             {
@@ -24,11 +30,12 @@ namespace GenericType.FileWorker
             throw new InvalidCastException("Different version of classes");
         }
 
-        public void SerializeToJSONFile<T>(string path, T data) where T : class
+        /// <inheritdoc cref="IFileWorker.Serialize{T}(string, T)"/>
+        public void Serialize<T>(string path, T data) where T : class
         {
             using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
-            var jsonSerializer = new DataContractJsonSerializer(typeof(T), _settings);
-            jsonSerializer.WriteObject(fileStream, data);
+            _jsonSerializer = new DataContractJsonSerializer(typeof(T), _settings);
+            _jsonSerializer.WriteObject(fileStream, data);
         }
     }
 }

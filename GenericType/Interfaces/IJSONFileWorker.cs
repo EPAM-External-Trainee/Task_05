@@ -1,9 +1,8 @@
 ﻿namespace GenericType.Interfaces
 {
-    public interface IJSONFileWorker
+    /// <summary>Interface that describes basic operations for working with JSON file</summary>
+    public interface IJSONFileWorker : IFileWorker
     {
-        void SerializeToJSONFile<T>(string path, T data) where T : class;
 
-        T DeserializeFromJSONFile<T>(string path, string actualClassVersion) where T : class;
     }
 }

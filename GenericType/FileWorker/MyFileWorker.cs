@@ -7,9 +7,7 @@ namespace GenericType.Serializers
 {
     public static class MyFileWorker<T> where T : class
     {
-        private static readonly IBinaryFileWorker binaryFileWorker = new BinaryFileWorker();
-        private static readonly IJSONFileWorker jSONFileWorker = new JSONFileWorker();
-        private static readonly IXmlFileWorker xmlFileWorker = new XmlFileWorker();
+        private static IFileWorker _fileWorker;
 
         public static void Serialize(string path, T data, SerializationType serializationType)
         {
@@ -17,9 +15,9 @@ namespace GenericType.Serializers
             {
                 switch (serializationType)
                 {
-                    case SerializationType.Binary: binaryFileWorker.SerializeToBinaryFile(path, data); return;
-                    case SerializationType.JSON: jSONFileWorker.SerializeToJSONFile(path, data); return;
-                    case SerializationType.XML: xmlFileWorker.SerializeToXmlFile(path, data); return;
+                    case SerializationType.Binary: _fileWorker = new BinaryFileWorker(); _fileWorker.Serialize(path, data); return;
+                    case SerializationType.JSON: _fileWorker = new JSONFileWorker(); _fileWorker.Serialize(path, data); return;
+                    case SerializationType.XML: _fileWorker = new XmlFileWorker(); _fileWorker.Serialize(path, data); return;
                 }
             }
             catch (InvalidCastException ice)
@@ -36,13 +34,14 @@ namespace GenericType.Serializers
         {
             try
             {
-                return deserializationType switch
+                switch (deserializationType)
                 {
-                    DeserializationType.Binary => binaryFileWorker.DeserializeFromBinaryFile<T>(path, actualClassVersion),
-                    DeserializationType.JSON => jSONFileWorker.DeserializeFromJSONFile<T>(path, actualClassVersion),
-                    DeserializationType.XML => xmlFileWorker.DeserializeFromXmlFile<T>(path, actualClassVersion),
-                    _ => null,
-                };
+                    case DeserializationType.Binary: _fileWorker = new BinaryFileWorker(); return _fileWorker.Deserialize<T>(path, actualClassVersion);
+                    case DeserializationType.JSON: _fileWorker = new JSONFileWorker(); return _fileWorker.Deserialize<T>(path, actualClassVersion);
+                    case DeserializationType.XML: _fileWorker = new XmlFileWorker(); return _fileWorker.Deserialize<T>(path, actualClassVersion);
+                }
+
+                return null;
             }
             catch (InvalidCastException ice)
             {
