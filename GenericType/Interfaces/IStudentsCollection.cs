@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GenericType.Interfaces
 {
-    /// <summary>Interface that describes <see cref="Student"/> collection</summary>
+    /// <summary>Interface that describes <see cref="Student"/>'s collection</summary>
     /// <typeparam name="T"><see cref="Student"/></typeparam>
     public interface IStudentsCollection<T> : ICollection<T> where T : Student
     {

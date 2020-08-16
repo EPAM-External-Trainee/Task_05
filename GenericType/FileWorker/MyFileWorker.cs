@@ -41,7 +41,7 @@ namespace GenericType.Serializers
         /// <param name="path">Path to file</param>
         /// <param name="data">Serializable class</param>
         /// <param name="deserializationType">Type for deserialization</param>
-        /// <returns></returns>
+        /// <returns>Deserialized data</returns>
         public static T Deserialize(string path, string actualClassVersion, DeserializationType deserializationType)
         {
             try

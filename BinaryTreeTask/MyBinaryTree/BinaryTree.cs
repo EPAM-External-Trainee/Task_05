@@ -44,8 +44,8 @@ namespace BinaryTree.MyBinaryTree
         private int GetMaxDepth(TreeNode<T> treeNode) => treeNode == null ? 0 : 1 + Math.Max(GetMaxDepth(treeNode.LeftNode), GetMaxDepth(treeNode.RightNode));
 
         /// <summary>Check for a balanced tree</summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
+        /// <param name="root"><see cref="IBinaryTree{T}.Root"/></param>
+        /// <returns>True if the tree is balanced, false if not</returns>
         private bool IsBalancedTree(TreeNode<T> root) => root == null ? true : Math.Abs(GetMaxDepth(root.LeftNode) - GetMaxDepth(root.RightNode)) <= 1 && IsBalancedTree(root.LeftNode) && IsBalancedTree(root.RightNode);
 
         /// <inheritdoc cref="IBinaryTree.Add(T)"/>
