@@ -9,7 +9,7 @@ using System.Text;
 namespace BinaryTree.MyBinaryTree
 {
     /// <summary>Class that describes binary tree</summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T"><see cref="Student"/></typeparam>
     public class BinaryTree<T> : IBinaryTree<T> where T : Student
     {
         /// <summary>Instance constructor with parameters</summary>
@@ -39,7 +39,7 @@ namespace BinaryTree.MyBinaryTree
         public bool IsBalanced => IsBalancedTree(Root);
 
         /// <summary>Search for maximum depth</summary>
-        /// <param name="root"><see cref="BinaryTree{T}.Root"/></param>
+        /// <param name="treeNode"><see cref="BinaryTree{T}.Root"/></param>
         /// <returns>Max depth</returns>
         private int GetMaxDepth(TreeNode<T> treeNode) => treeNode == null ? 0 : 1 + Math.Max(GetMaxDepth(treeNode.LeftNode), GetMaxDepth(treeNode.RightNode));
 

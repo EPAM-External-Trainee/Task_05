@@ -7,7 +7,7 @@ namespace BinaryTree.MyBinaryTree
     /// <typeparam name="T"><see cref="Student"/></typeparam>
     public class TreeNode<T> : ITreeNode<T> where T : Student
     {
-        /// <summary></summary>
+        /// <summary>Instance constructor with parameters</summary>
         /// <param name="data"></param>
         public TreeNode(T data) => Data = data;
 

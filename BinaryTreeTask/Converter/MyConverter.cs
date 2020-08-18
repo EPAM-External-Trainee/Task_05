@@ -24,7 +24,7 @@ namespace BinaryTree.Converter
         /// <param name="students"><see cref="List{T}"/> of <see cref="Student"/>'s</param>
         private static void GetListFromBinaryTree<T>(TreeNode<T> root, List<T> students) where T : Student
         {
-            if(root == null)
+            if (root == null)
             {
                 return;
             }
