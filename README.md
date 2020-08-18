@@ -1,4 +1,4 @@
-# EPAM_External_Trainee_Task_05_Konstantin_Kapatkov
+# .NET Summer 2020 (external)
 ## Task05. Data_structures_Generics
 ### Task 1
 * Develop your own generic "binary tree" type for storing the results of tests performed by students and their results they are presented in an ordered form.
