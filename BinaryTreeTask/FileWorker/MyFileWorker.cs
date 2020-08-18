@@ -25,7 +25,7 @@ namespace BinaryTree.FileWorker
                     case SerializationType.XML: _fileWorker = new XmlWorker(); _fileWorker.SerializeBinaryTree(path, binaryTree); return;
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 throw new Exception(exc.Message);
             }
@@ -44,7 +44,7 @@ namespace BinaryTree.FileWorker
                     case DeserializationType.XML: _fileWorker = new XmlWorker(); return _fileWorker.DeserializeBinaryTree(path);
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 throw new Exception(exc.Message);
             }
